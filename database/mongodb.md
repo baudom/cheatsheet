@@ -18,7 +18,7 @@
 
 ## Linux
 
--   `WIP`
+**WIP**
 
 # Installation (Docker)
 
@@ -30,13 +30,15 @@
 docker pull mongo
 ```
 
-## 2 Create volume for persistent storage (required for windows, optional for linux/mac)
+## 2 Create volume
+
+**Note**: This step is required for Windows, optional for Linux and macOS
 
 ```shell
 docker volume create <volume>
 ```
 
--   **\<volume\>**: your volume identifier
+-   `<volume>`: your volume identifier
 
 ## 3 Create and run container
 
@@ -44,11 +46,11 @@ docker volume create <volume>
 docker run -it -v <volume>:/etc/mongodb -p 27017:27017 --name <name> -d mongo
 ```
 
--   **-it**: run the installation interactive
--   **-v**: used volume and mounting path
--   **-p**: inner port : outer port (outer port can be chosen as you want)
--   **--name**: alias of your container, e.g. "mongodb"
--   **-d**: used image
+-   `-it`: run the installation interactive
+-   `-v`: used volume and mounting path
+-   `-p`: inner port : outer port (outer port can be chosen as you want)
+-   `--name`: alias of your container, e.g. "mongodb"
+-   `-d`: used image
 
 # MongoDB Shell (mongosh)
 
@@ -59,7 +61,7 @@ docker run -it -v <volume>:/etc/mongodb -p 27017:27017 --name <name> -d mongo
 
 ## Linux
 
--   `WIP`
+**WIP**
 
 # Authorisation (SCRAM)
 
@@ -69,11 +71,19 @@ docker run -it -v <volume>:/etc/mongodb -p 27017:27017 --name <name> -d mongo
 
 ### 1.1 Connect to MongoDB
 
--   `mongosh --port <port>` (default: 27017)
+```shell
+mongosh --port <port>
+```
+
+-   `<port>`: Port of MongoDB instance (default: 27017)
 
 ### 1.2 Switch to authentication database
 
--   `use <database>` (default: admin)
+```shell
+use <database>
+```
+
+-   `<database>`: Name of database (recommended: admin)
 
 ### 1.3 Create administrator within admin database
 
@@ -136,6 +146,9 @@ mongosh --port <port> --authenticationDatabase <database> -u <username> -p
 
 ```shell
 use <database>
+```
+
+```shell
 show users
 ```
 
