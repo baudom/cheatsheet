@@ -22,7 +22,7 @@
 
 # Installation (Docker)
 
-**Disclaimer**: A running instance of docker is required.
+**Note**: A running instance of docker is required.
 
 ## 1 Pull latest stable docker image
 
@@ -65,7 +65,7 @@ docker run -it -v <volume>:/etc/mongodb -p 27017:27017 --name <name> -d mongo
 
 # Authorisation (SCRAM)
 
-**Disclaimer**: Authorisation was set up with mongosh@1.4.1 and [this Tutorial][tutorial] published from MongoDB. A running instance of mongodb server without any authorisation is also required.
+**Note**: Authorisation was set up with mongosh@1.4.1 and [this Tutorial][tutorial] published from MongoDB. A running instance of mongodb server without any authorisation is also required.
 
 ## 1 Setup authorisation and create admin user
 
@@ -103,9 +103,9 @@ db.createUser({
 -   `passwordPrompt()`: Opens a prompt to input the password.
 -   `userAdminAnyDatabase`: The created User can create users, grant or revoke roles from users and create or modify
     custom roles
--   `<database>`: Placeholder for you database, use the same as used in 2.2
 -   `readWriteAnyDatabase`: The created user can read and write any database on this server
--   An example of all available build-in roles can be found [here][buildinroles]
+-   `<database>`: role for this database, the same as used in [1.2](#12-switch-to-authentication-database)
+-   More examples of all available build-in roles can be found [here][buildinroles]
 
 ### 1.4 Shutdown MongoDB and exit shell
 
@@ -124,7 +124,7 @@ db.adminCommand({ shutdown: true })
 
 ### 1.7 Restart MongoDB
 
--   Windows (navigate in directory mentioned in 5: Open MongoDB Configuration File):
+-   Windows (navigate in directory mentioned [1.5](#15-open-mongodb-configuration-file-mongodcfg)):
 
 ```shell
 ./mongod.exe --auth --port <port> --dbpath "C:/<install location>/MongoDB/Server/\<version>/data"
@@ -136,11 +136,19 @@ db.adminCommand({ shutdown: true })
 mongod --auth --port <port> --dbpath "/var/lib/mongodb"
 ```
 
-### 1.8 Connect to Database with previous created use
+-   `--auth`: starts the mongodb server with authorisation
+-   `--port`: specify port to listen on
+-   `--dbpath`: persistence path of server
+
+### 1.8 Connect to Database with previous created user
 
 ```shell
 mongosh --port <port> --authenticationDatabase <database> -u <username> -p
 ```
+
+-   `--authenticationDatabase`: database used for authentication (same as used in [1.3](#13-create-administrator-within-admin-database))
+-   `-u`: username
+-   `-p`: password (can be passed plain or during connection (recommended))
 
 ### 1.9 Switch to authentication Database and check user
 
@@ -182,7 +190,7 @@ db.grantRolesToUser(<username>, [{ role: "readWrite", db: <database2> }] , {})
 
 ### 2.4 Update whole User
 
--   **Important**: The whole array of assigned roles will be replaced with the new roles. [See more Information][updateuser]
+**Note**: The whole array of assigned roles will be replaced with the new roles. [See more Information][updateuser]
 
 ```shell
 db.updateUser(<username>,{
