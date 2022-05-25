@@ -1,6 +1,6 @@
 # mongodb
 
-**Foreword**: [MongoDB][mongodb] is an NoSQL (Not-Only-SQL) Database, which stores its content in Collections in a JSON-like format. The following Documentation is performed with MongoDB Community Server.
+> :bulb: **Foreword:** [MongoDB][mongodb] is an NoSQL (Not-Only-SQL) Database, which stores its content in Collections in a JSON-like format. The following Documentation is performed with MongoDB Community Server.
 
 # Table of Content
 
@@ -22,7 +22,7 @@
 
 # Installation (Docker)
 
-**Note**: A running instance of docker is required.
+> :information_source: **Note:** A running instance of docker is required.
 
 ## 1 Pull latest stable docker image
 
@@ -32,7 +32,7 @@ docker pull mongo
 
 ## 2 Create volume
 
-**Note**: This step is required for Windows, optional for Linux and macOS
+> :information_source: **Note:** This step is required for Windows, optional for Linux and macOS
 
 ```shell
 docker volume create <volume>
@@ -56,8 +56,15 @@ docker run -it -v <volume>:/etc/mongodb -p 27017:27017 --name <name> -d mongo
 
 ## Windows
 
--   Download [MongoDB Shell][mongosh] (known as mongosh)
--   Unzip or install the downloaded .zip or .msi (.msi recommended)
+1. Download [MongoDB Shell][mongosh] (known as mongosh)
+2. Unzip or install the downloaded .zip or .msi (.msi recommended)
+3. Close any CMD Window
+4. Reopen CMD and connect to your MongoDB
+```shell
+mongosh --port <port>
+```
+
+-   `<port>`: Port of MongoDB instance (default: 27017)
 
 ## Linux
 
@@ -65,7 +72,7 @@ docker run -it -v <volume>:/etc/mongodb -p 27017:27017 --name <name> -d mongo
 
 # Authorisation (SCRAM)
 
-**Note**: Authorisation was set up with mongosh@1.4.1 and [this Tutorial][tutorial] published from MongoDB. A running instance of mongodb server without any authorisation is also required.
+> :information_source: **Disclaimer:** Authorisation was set up with mongosh@1.4.1 and [this Tutorial][tutorial] published from MongoDB. A running instance of mongodb server without any authorisation is also required.
 
 ## 1 Setup authorisation and create admin user
 
@@ -190,7 +197,7 @@ db.grantRolesToUser(<username>, [{ role: "readWrite", db: <database2> }] , {})
 
 ### 2.4 Update whole User
 
-**Note**: The whole array of assigned roles will be replaced with the new roles. [See more Information][updateuser]
+> :warning: **Warning:** The whole array of assigned roles will be replaced with the new roles. [See more Information][updateuser]
 
 ```shell
 db.updateUser(<username>,{
